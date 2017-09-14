@@ -1,0 +1,59 @@
+'''
+@author: 
+@date:
+
+@note:
+
+'''
+
+import sys, random
+from compsci260lib import *
+
+def find_genes(sequence, min_length):
+    
+    start_codon=[i.start() for i in re.finditer("aug",sequence)]
+    stop_codon=[i.start() for i in re.finditer("uag",sequence)]+[i.start() for i in re.finditer("uga",sequence)]+[i.start() for i in re.finditer("uaa",sequence)]
+    print stop_codon 
+    print start_codon 
+    
+    for i in range(len(stop_codon)):
+        this_stop_codon=stop_codon[i]
+     
+        if i!=0: 
+            previous_stop_codon=stop_codon[i-1]
+        if i==0:
+            previous_stop_codon=0
+            
+        
+            
+        for j in start_codon:
+        
+            if j>=previous_stop_codon and j<this_stop_codon and j%3==this_stop_codon%3:
+               
+                if this_stop_codon-j+1>=min_length:
+                    print str(j)+" "+str(this_stop_codon)
+                break
+        
+            
+                    
+          
+
+def solve_orfs():
+    """Your code goes here..."""
+    
+    #a)
+    dict=get_fasta_dict("sars.fasta")
+    sequence=dict["sars"]
+    find_genes(sequence,10)
+    
+
+
+
+
+
+
+
+
+	
+if __name__ == '__main__':
+    solve_orfs()

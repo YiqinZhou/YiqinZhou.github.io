@@ -1,0 +1,8 @@
+1505096026737	Delete element
+1505097090625	Extract method 'updateScoreText'
+1505343384835	Extract method 'reachBottom'
+1505354708619	Extract method 'checkCollisionWithBottom'
+1505354798456	Extract method 'checkCollisionWithPaddle'
+1505355034571	Extract method 'checkCollisionWithBrick'
+1505355349393	Extract method 'addedScore'
+1505355573019	Extract method 'addedPowerUp'

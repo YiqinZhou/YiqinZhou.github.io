@@ -1,0 +1,25 @@
+'''
+@author: 
+@date:
+
+@note:
+
+'''
+
+import sys, random
+from compsci260lib import *
+
+def solve_orfs():
+    """Your code goes here..."""
+
+
+
+
+
+
+
+
+
+	
+if __name__ == '__main__':
+    solve_orfs()

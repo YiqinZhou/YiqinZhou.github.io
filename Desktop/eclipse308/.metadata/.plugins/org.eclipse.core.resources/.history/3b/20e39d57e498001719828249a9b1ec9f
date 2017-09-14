@@ -1,0 +1,25 @@
+'''
+@author: 
+@date:
+
+@note: 
+
+'''
+
+import sys
+from compsci260lib import *
+
+def solve_plasmid():
+    """Your code goes here..."""
+
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    solve_plasmid()

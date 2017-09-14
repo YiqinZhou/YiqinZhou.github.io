@@ -1,0 +1,109 @@
+/**
+ * This class represents the traditional word-guessing game Hangman
+ * where the computer guesses letters based on a predictable pattern.
+ *
+ * @author Robert C. Duvall
+ */
+public class HangmanGameAutoGuesser {
+    // word that is being guessed
+    private String mySecretWord;
+    // how many guesses are remaining
+    private int myNumGuessesLeft;
+    // what is shown to the user
+    private StringBuilder myDisplayWord;
+    // tracks letters guessed
+    private StringBuilder myLettersLeftToGuess;
+    // guesser state
+    private char[] myLetters;
+    private int myIndex;
+
+
+    /**
+     * Create Hangman game with the given dictionary of words to play a game with words 
+     * of the given length and giving the user the given number of chances.
+     */
+    public HangmanGameAutoGuesser (HangmanDictionary words, int wordLength, int numGuesses) {
+        mySecretWord = words.getRandomWord(wordLength);
+        myNumGuessesLeft = numGuesses;
+        myLettersLeftToGuess = new StringBuilder("abcdefghijklmnopqrstuvwxyz");
+        myDisplayWord = new StringBuilder(mySecretWord.length());
+        for (int k = 0; k < mySecretWord.length(); k++) {
+            char ch = mySecretWord.charAt(k);
+            if (Character.isAlphabetic(ch)) {
+                myDisplayWord.append("_");
+            }
+            else {
+                myDisplayWord.append(mySecretWord.charAt(k));
+            }
+        }
+        myLetters = "etaoinshrldcumfpgwybvkxjqz".toCharArray();
+        myIndex = 0;
+    }
+
+    /**
+     * Process a guess by updating the necessary internal state.
+     */
+    public boolean makeGuess (char guess) {
+        // do not count repeated guess as a miss
+        int index = myLettersLeftToGuess.indexOf("" + guess);
+        if (index < 0) {
+            return false;
+        }
+
+        // record guess
+        myLettersLeftToGuess.deleteCharAt(index);
+
+        // check for guess in secret word
+        if (mySecretWord.toLowerCase().indexOf("" + guess) < 0) {
+            myNumGuessesLeft -= 1;
+            return false;
+        }
+
+        // update displayed knowledge
+        for (int k = 0; k < mySecretWord.length(); k++) {
+            if (mySecretWord.toLowerCase().charAt(k) == guess) {
+                myDisplayWord.setCharAt(k, guess);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Play one complete game.
+     */
+    public void play () {
+        boolean gameOver = false;
+        while (!gameOver) {
+            // print game status
+            for (int k = 0; k < myDisplayWord.length(); k++) {
+                System.out.print(myDisplayWord.charAt(k) + " ");
+            }
+            System.out.println();
+            System.out.println("# misses left = " + myNumGuessesLeft);
+            System.out.println("letters not yet guessed = " + myLettersLeftToGuess);
+            // NOT PUBLIC, but makes it easier to test
+            System.out.println("*** " + mySecretWord);        
+            System.out.println();
+
+            // handle guess
+            String guess = "" + myLetters[myIndex++];
+            if (guess.length() == 1 && Character.isAlphabetic(guess.charAt(0))) {
+                makeGuess(guess.toLowerCase().charAt(0));
+            }
+            else {
+                System.out.println("Please enter a single letter ...");
+            }
+
+            // check for end of game
+            if (myNumGuessesLeft == 0) {
+                System.out.println("YOU ARE HUNG!!!");
+                gameOver = true;
+            }
+            else if (mySecretWord.equals(String.join("", myDisplayWord))) {
+                System.out.println("YOU WIN!!!");
+                gameOver = true;
+            }
+        }
+        System.out.println("The secret word was " + mySecretWord);
+    }
+}

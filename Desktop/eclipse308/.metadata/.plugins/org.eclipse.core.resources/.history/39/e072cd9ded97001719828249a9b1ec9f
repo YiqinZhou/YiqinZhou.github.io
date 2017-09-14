@@ -1,0 +1,42 @@
+Course: COMPSCI 260
+Name: Yiqin Zhou
+NetID: yz259
+Problem: 2 
+Problem Set: 1
+Due: Fri 15 Sep 2017, 5pm
+Using free extension (yes/no): no
+
+Statement of collaboration and resources used (put None if you worked 
+entirely without collaboration or resources; otherwise cite carefully):
+None
+
+My solutions and comments for this problem are below.
+-----------------------------------------------------
+a) As shown in the code section. The algorithm is looking at every stop codon
+   and a previous stop codon in the same ORF. Then find the first start codon
+   during this part of sequence.
+
+b) By passing in different parameters (10,40 and 70 for "min_length_aa" respectively),
+   I get the number of ORFs as 199,47,16 respectively. I know the number of ORFs will 
+   get smaller and smaller as the amino acids length get longer because some shorter
+   ORFs do not fulfill the minimum length requirement and have to be removed. 
+   
+c) The average lengths for 10, 40 and 70 minimum are 73.90, 250.85 and 637.94 respectively.
+   The average lengths for 70 is significantly higher because the ORFs that satisfy the minimum
+   are rare and they are usually extremely long. 
+
+d) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

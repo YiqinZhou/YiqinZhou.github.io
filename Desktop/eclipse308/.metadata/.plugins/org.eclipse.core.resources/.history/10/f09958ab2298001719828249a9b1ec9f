@@ -1,0 +1,63 @@
+CompSci 308: Game Analysis
+===================
+
+> This is the link to the assignment: [Game](https://coursework.cs.duke.edu/CompSci308_2017Fall/game_yz259)
+
+Project Journal
+=======
+
+### Time Review
+I started the project on Sept 1, finished it on Sept 10 and I used roughly 20 hours for the whole project. 
+
+For the planning, I spent roughly 2 hours. I planned a bit carelessly without thinking of how practical my plan was because at that time I had no idea about how the whole game should be implemented (I could not even distinguish which function would be easier to implement). Then during the first week, I spent about 5 hours to make the basic code functioning. I built my code on the basis of lab, which was a wise choice because there are many similarities between the lab and the Breakout assignment. However, I did not spend enough time thinking beforehand. This made my code have a bad structure and increase the difficulty level of debugging. I put everything together just to make the code work without properly managing the class and the structure. Therefore, after the first 5 hours, when the basic game work, I realized that it was not possible to continue if I would not clean up the code. So I spent next 2 hours cleaning up, extracting classes and commenting my code. At the same time, I added new features bit by bit. I tested along the way, which was a good practice. After adding a new feature, I made sure that it actually worked before proceeding to another feature. I spent a lot of time managing different scenes (switching from one level to another). In the end, it turned out to be not a really difficult task, but I tried a lot of methods and some did not work. I watched tutorials online but they were either outdated or they did not use animation which made my code somewhat unique. I tried for 5 hours and finally it worked. During the whole process, I also encountered two major bugs which took me around 2 hours to debug. One occurred when my ball could not be bounced after touching the paddle. I realized that the speed of the ball was changed to zero before it leaved the paddle. This made the ball stick on to the paddle forever. Another bug was actually stupid: an if condition was met unexpectedly. I spent time debugging by adding print statement and checking line one by one to see possible bugs.
+
+Personally, I managed my code by testing it often. As I have mentioned, I tested the code after each feature was added or a main part was altered. I committed less often, with 14 times in total. I would only commit after a requirement was met (eg. added all three paddle functions). Also, every time I committed, I pushed it to the Gitlab. I think I should commit more often in the future as the commit message and the difference comparison can actually be helpful. There were times when I would like to go back to a certain stage of code, but did not sure about which stage I should go to. If I committed more often, it would be more convenient for me to develop the code. I will definitely make better use of the commit and push tools in the future.
+
+
+   
+
+
+
+
+
+ 
+
+### Commits
+
+You can put links to commits like this: [My favorite commit](https://coursework.cs.duke.edu/CompSci308_2017Fall/example_bins/commit/7e0c9212b6d10acc5774496349dacfdf25d3d077)
+
+### Conclusions
+
+
+Design Review
+=======
+
+### Status
+
+* Bullets are made with asterisks
+
+1. You can order things with numbers.
+
+### Design
+
+You can put blocks of code in here like this:
+```java
+    /**
+     * Returns sum of all values in given list.
+     */
+    public int getTotal (Collection<Integer> data) {
+        int total = 0;
+        for (int d : data) {
+            total += d;
+        }
+        return total;
+    }
+```
+
+### Alternate Designs
+
+Here is another look at my design:
+
+![This is cool, too bad you can't see it](crc-example.png "An alternate design")
+
+

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract constant &apos;paddleApartFromBottom&apos; from expression &apos;50&apos;&#x0A;- Original project: &apos;game_yz259&apos;&#x0A;- Constant name: &apos;paddleApartFromBottom&apos;&#x0A;- Constant expression: &apos;50&apos;&#x0A;- Declared visibility: &apos;private&apos;" description="Extract constant &apos;paddleApartFromBottom&apos;" flags="786432" id="org.eclipse.jdt.ui.extract.constant" input="/src&lt;{Level.java" name="paddleApartFromBottom" qualify="false" replace="false" selection="2355 2" stamp="1504986303038" version="1.0" visibility="2"/>
+</session>

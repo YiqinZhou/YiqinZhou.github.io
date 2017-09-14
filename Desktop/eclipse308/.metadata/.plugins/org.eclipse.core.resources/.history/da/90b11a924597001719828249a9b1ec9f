@@ -1,0 +1,39 @@
+Course: COMPSCI 260
+Name: Yiqin Zhou
+NetID: yz259
+Problem: 1
+Problem Set: 1
+Due: Fri 15 Sep 2017, 5pm
+Using free extension (yes/no): no
+
+Statement of collaboration and resources used (put None if you worked 
+entirely without collaboration or resources; otherwise cite carefully):
+None
+
+My solutions and comments for this problem are below.
+-----------------------------------------------------
+a) The location for the beginning of the code is stored in the variable 'beginning' 
+   and the location for the end of the code is stored in the variable 'end'.
+   The length of the Cdc24 gene is 3565-1001+1=2565. (Stored in the variable 'length_of_gene') .
+   The length of Cdc24's peptide product is (2565-3)/3=854 (Stored in the variable 'length_of_peptide_product')
+   because every triple will translate into one amino acid, 
+   but we need to exclude the stop codon because it will not have corresponding amino acid but just stop.
+   The function of this protein is: Guanine nucleotide exchange factor (GEF) for Cdc42p; 
+   it is required for polarity establishment and maintenance.
+   
+b) Yes, the actual sequence which is recognized by each enzyme is reported and the position is reported. 
+   Because only BstYI and StyI do not have fixed sequence, only those two are reported for sequence.
+   As shown by the result of the code, the regions upstream and downstream of the Cdc24 gene contain
+   BamHI, BstYI, SpeI, SphI, but does not contain StyI. 
+
+c) Integrating plasmids can integrate into the host chromosome. A plasmid is a small, circular, double-stranded DNA
+   molecule that is distinct from a cell's chromosomal DNA. Often the genes carried in plasmids provide cell with
+   genetic advantages.
+   An ampicillin resistance gene codes for an enzyme (b-lactamase) that is secreted into the periplasmic space of the bacterium where it catalyzes hydrolysis of the b-lactam ring of the ampicillin. Thus, the gene product of the ampr gene destroys the antibiotic. 
+   A lacZ gene
+   A replication origin
+   A multiple cloning site
+   An auxotrophic market
+   
+   
+   

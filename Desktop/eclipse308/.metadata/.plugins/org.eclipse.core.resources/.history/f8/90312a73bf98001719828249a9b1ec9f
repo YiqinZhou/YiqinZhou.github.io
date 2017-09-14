@@ -1,0 +1,176 @@
+CompSci 308: Game Analysis
+===================
+
+> This is the link to the assignment: [Game](https://coursework.cs.duke.edu/CompSci308_2017Fall/game_yz259)
+
+Project Journal
+=======
+
+### Time Review
+I started the project on Sept 1, finished it on Sept 10 and I used roughly 20 hours for the whole project. 
+
+For the planning, I spent roughly 2 hours. I planned a bit carelessly without thinking of how practical my plan was because at that time I had no idea about how the whole game should be implemented (I could not even distinguish which function would be easier to implement). Then during the first week, I spent about 5 hours to make the basic code functioning. I built my code on the basis of lab, which was a wise choice because there are many similarities between the lab and the Breakout assignment. However, I did not spend enough time thinking beforehand. This made my code have a bad structure and increase the difficulty level of debugging. I put everything together just to make the code work without properly managing the class and the structure. Therefore, after the first 5 hours, when the basic game work, I realized that it was not possible to continue if I would not clean up the code. So I spent next 2 hours cleaning up, extracting classes and commenting my code. At the same time, I added new features bit by bit. I tested along the way, which was a good practice. After adding a new feature, I made sure that it actually worked before proceeding to another feature. I spent a lot of time managing different scenes (switching from one level to another). In the end, it turned out to be not a really difficult task, but I tried a lot of methods and some did not work. I watched tutorials online but they were either outdated or they did not use animation which made my code somewhat unique. I tried for 5 hours and finally it worked. During the whole process, I also encountered two major bugs which took me around 2 hours to debug. One occurred when my ball could not be bounced after touching the paddle. I realized that the speed of the ball was changed to zero before it leaved the paddle. This made the ball stick on to the paddle forever. Another bug was actually stupid: an if condition was met unexpectedly. I spent time debugging by adding print statement and checking line one by one to see possible bugs.
+
+Personally, I managed my code by testing it often. As I have mentioned, I tested the code after each feature was added or a main part was altered. I committed less often, with 14 times in total. I would only commit after a requirement was met (eg. added all three paddle functions). Also, every time I committed, I pushed it to the Gitlab. I think I should commit more often in the future as the commit message and the difference comparison can actually be helpful. There were times when I would like to go back to a certain stage of code, but did not sure about which stage I should go to. If I committed more often, it would be more convenient for me to develop the code. I will definitely make better use of the commit and push tools in the future.
+
+The easiest task for me was to build a specific function. For example, adding the paddle's function to make it catch the ball. Adding the bricks to make it only be cleared after three hits. Those were easy for me because they were specific small tasks. The hardest part was to figure out the whole coding structure so that I could jump from one level to another. I needed to have a clear overview of my whole structure. The good use of my time was to restructure my code. For example, I used to put all stuff in one class, with bricks and paddle as ImageView only. Then I made them into individual classes. This not only made my code cleaner but also helped me to add some functionality. Bad time spent when I was randomly watching some tutorials online which was not applicable. I realized that it would be better to try the code and think the code in my own situation. Without trying, I would never know whether the code would work.
+
+ 
+   
+### Commits
+
+You can put links to commits like this: [My favorite commit](https://coursework.cs.duke.edu/CompSci308_2017Fall/game_yz259/commits/master)
+
+I committed 14 times. On average, the sizes of those commits were big. At first, I did not even have the conscious to commit. So I typically committed after a block of time coding. For example, I committed my code before going to sleep. This made my commit message meaningless and my committed content stick together. The first two commits were "Added plan" and "Basic game worked". These descriptions are accurate, but I think I could have committed more often. I committed more often afterwards, but somewhat random. For example, "added paddle function, fixed multiple hit brick". This commit should have been separated according to two parts. But most messages make sense and do represent my project "story". As I can see from my commits that I start on one level first, making basic game work, then adding different customized functions. By finishing one level, I turned to switch levels and add some final features such as cheat keys. 
+
+One commit is "Refactored level out". The purpose of this commit is straight-forward. I refactored the level class out of the main class. I packaged those changes together because I had a clearer structure for my code at that stage, with main class and level class. Beforehand, I only had one class- the main. I think this size is reasonable as it is very clear about what this commit did and my commit did exactly the same thing.
+
+Another commit is "Added paddle function, fixed multiple hit brick". The purpose of this commit is a bit vague. I added a whole paddle class, added three paddle functions according to different scores and i also made multiple hit bricks. I packaged those changes together without an obvious reason, just because I liked to take a rest and remembered that I have not committed my code. The size is unreasonable with 270 additions and 75 deletions. Even I myself had a hard time figuring out what I did during this commit. It was not only too big, but also too random.
+
+### Conclusions
+
+I estimated the size of this project correctly and managed my time well in general. During my first weekend, I made basic game work. Next week, I added more functions to make one level work. Then during the second weekend, I debugged and finished switching levels. However, I did not expect that I spent so much time on switching levels, which was a quite easy task but I was just confused. I could estimate better by writing out a clear time line. Because this time I was doing the project intuitively without detailed planning. Luckily I figured the switching level part four hours before deadline. But it was not a good idea to wait until the last day to finish such a major problem. I would write out a deadline for specific tasks for my own to manage time better.
+
+The level part of my code required the most editing. Because it was the longest and it was the first part I started. When I first started, I did not have a good idea about how my code would look like. I also had little experience in designing. Therefore, I just tried to make the code work instead of structuring it consciously in a way that was considered "good design". Thus, I spent lots of time editing it afterwards. There were also all kinds of weird bugs coming up when I was testing the code. 
+
+To be a better designer, I would definitely start planning my structure before writing my code. Because writing small tasks is actually easy for me. The hard part is to organize the code together. Therefore, I think it is a good practice to think beforehand how many classes should I have, what kind of functions should go into which class etc. Then comment the specific functionality. After a detailed planning, I only need to change the comment into code. This saved the efforts of refactoring again in the future, which could be tedious and ineffective. 
+
+I would keep testing along the way. It is a really good practice as if I am sure a certain part of code is working, if I am having bugs, it must come from newly written code. This makes debugging much easier. 
+
+I should stop committing changes randomly. I need to have a conscious to commit regularly with reasonable content. This will not only make other people understand my code better, but also help my process of developing the code. As I could easily compare with a certain stage of code and find bugs.
+
+I would refactor my level class. Although I have improved it along the way, it is still too long and some parts are redundant. After Sept 12's class, I realized that I could have made a super class for bricks and sub classes for different types of bricks. This would delete some redundant code in the level class and make my code cleaner. 
+
+Design Review
+=======
+
+### Status
+
+1. 
+* The code is generally consistent in its naming conventions. The names are given based on their functionalities, such as updateScoreText, currentPowerUp etc. With the first word starting with lower case and the following words start with upper class. But there are some names that are vague such as myVelocity1 (which gives the velocity of the ball) and myBouncer1 (which refers to the ball). This is because I developed the code based on the lab exercise. However, I should have changed the variable name to make it clearer and fit to my code. There is only one ball in my game, so it is confusing to name it as "1". Furthermore, some names could have been named better, such as "image" are used to describe variables that are ImageView. This could be confusing to other people who view my code. 
+
+* The code is generally consistent in its layout for class Brick, Paddle and PowerUp class. I always put instance variables, then constructors, then get Methods and finally set Methods. However, it is a bit messy for ExampleBounce and Level class. It is hard to find which method is called first, as they are not logically lined up. This is because I did not think about layout as a problem and because I edited those two classes so much, the methods just laid around randomly.
+
+* The style of the code is generally consistent. Indentations are followed using general conventions. "and" is consistently written using "&&" and "i" is always used for loops. The blank lines among the codes are a bit messy because I always deleted codes here and there. 
+
+* For descriptiveness, as I have mentioned, it is generally consistent. Especially for every class (Paddle, PowerUp, Brick), similar attributes such as X ordinates and Y ordinates are described similarly (Xord, Yord). Functions serving the same functions also have same name such as getImage().
+
+2. * The code is generally readable. For example, as shown by the block of code below, it is clear when each condition is met, what should be done. variables such as "catchBy" are set up to differentiate among different conditions. The name gives a hint of its function and it also simplifies the code.    
+
+           // ball hits the paddle
+		   if (myBouncer1.getBoundsInParent().intersects(paddle.getImage().getBoundsInParent())) {
+
+			if (score < 200 || score >= 300) {
+				myVelocity1 = new Point2D(myVelocity1.getX(), -myVelocity1.getY());
+			}
+
+			// extra paddle power: hold the ball and release afterwards
+			if (score >= 200 && score < 300 && paddle.getCatchby() == false) {
+
+				myVelocity1 = new Point2D(0, 0);
+			}
+			if (score >= 200 && score < 300 && paddle.getCatchby() == true) {
+				myVelocity1 = new Point2D(myVelocity1.getX(), -myVelocity1.getY());
+			}
+
+		}
+		
+3. * Some dependencies are easy to find. It is easy to spot class dependencies that Level class depends on Brick, Paddle and PowerUp. ExampleBounce depends on Level. It is easy in the sense that the logical relation is easy to find, but I should have put the dependency together at the start of class eg. set up Brick and Paddle at the start of Level class to make it more readable instead of scattering them around.  
+
+* There are also dependencies through global variables. Most global variables are used consistently across class, such as "public static final int SIZE = 400 ". These are easy to find as they are listed at the top of each class.
+
+* Parameters are generally short and necessary, though sometimes parameters are added just to pass a reference from a class to another class. For example, in the ExampleBounce, I set up level using "level1 = new Level(animation, stage, 1);". only "1" is actually useful to indicate the level is 1, both animation and stage are passed so that they can still be referred from the Level class. This is an example of dependency though it is also relatively easy to spot. 
+
+* The most difficult part to find the dependencies is within the level class. It involves the order of method call, so it can be subtle and it requires logic to understand the code. For example, the code "moveBouncer(myBouncer1, myVelocity1, elapsedTime);" must be put at the top of the "step" method in Level class. Because if it is put later, myVelocity1, which refers to the velocity of the ball can be already changed and the ball will not move correctly. This dependency actually caused me a great amount of time to debug because when I put it after changing myVelocity1 to zero when colliding with paddle, the ball will not move after collision.
+
+4. * A good example of block of code would be in the class of PowerUp. It is very clear that the purpose of this block of code is to set up power ups and change properties of power ups. The first part would be constructor of PowerUp, with some get and set functions to get or set attributes. createMotion() method changes the Y ordinate of power ups to make them drop. This part of code is easy because it breaks up into very small tasks and methods. But this part of code is largely passive, I could have put more methods inside this class. 
+
+	public PowerUp(int type, ImageView image,double Xord, double Yord) {
+		this.type=type;
+		this.image=image;
+		this.Xord=Xord;
+		this.Yord=Yord;
+		image.setX(Xord);
+		image.setY(Yord);
+	}
+	
+
+
+	public void createMotion() {
+		 this.Yord=Yord+2;
+		 image.setY(Yord);
+		
+	}
+	
+	public ImageView getImage() {
+		return this.image;
+	}
+	
+	public double getYord() {
+		return this.Yord;
+	}
+	
+	public int getType() {
+		return this.type;
+	}
+	
+	public void setYord(double Yord) {
+		this.image.setY(Yord);
+		this.Yord=Yord;
+	}
+	
+	public void setXord(double Xord) {
+		this.image.setX(Xord);
+		this.Xord=Xord;
+	}
+	
+
+* This block of code defines what should be done when ball touches the bottom. The player will lose one life; if life becomes zero after deduction, the whole level is lost. For the most part, the code is east to read. It starts with an if statement, showing the condition of touching the bottom. Then it deducts one life from the "life" variable. Then another inner condition, if life is zero, meaning the player loses this level, animation will stop and the scene will jump to lose scene (by calling loseScene). Else, the level continues. So the score board needs to be updated by calling "updateScoreText()" method. However, the following part, which basically resets the paddle and the ball to starting positions, could have been refactored to a method. It is hard to read and also redundant as reset to the original position is also called during the set up of the game.
+
+     // ball touches the bottom
+		if (myBouncer1.getY() > myScene.getHeight() - myBouncer1.getBoundsInLocal().getHeight())        {
+			life = life - 1;
+			if (life == 0) {
+				animation.stop();
+				pass = 0;
+				gameStart = false;
+				ExampleBounce test = new ExampleBounce();
+				test.loseScene(levelNumber);
+
+			}
+			updateScoreText();
+			paddle.setXord(SIZE / 2 - paddle.getImage().getFitWidth() / 2);
+			paddle.setYord(SIZE - paddleApartFromBottom);
+			myBouncer1.setX(SIZE / 2 - myBouncer1.getFitWidth() / 2);
+			myBouncer1.setY(SIZE - paddleApartFromBottom - myBouncer1.getFitHeight());
+			gameStart = false;
+			myVelocity1 = new Point2D(0, 0);
+
+		}
+		
+
+### Design
+
+1. * The overall design of the program is to add different levels to stage and link them using buttons. Within each level, there is a scene with paddle, bricks and ball added as Node. Then different animations will be performed when certain conditions are met or certain keys are typed. Specifically, Paddle and Brick are classes that I defined. Brick class is also linked to PowerUp class so that the function of dropping power up can be achieved. All paddle, brick and ball are basically ImageView or have attributes of ImageView so that checking collision and setting positions are easy. Different functions are expressed using mainly conditional statements. When the level ends, either lose or win, the Scene will be directed to a transitional scene with button on it so players can go to another level. 
+
+2. * We can add a new level by calling createNewScene function in the main class (ExampleBounce). Specifically, the function calls the Level class which sets up all the algorithms within levels.
+
+3. * The overall design of having one class for each object (brick, paddle, powerup or level) is meant to have smaller classes. In this way, duplicated code can be reduced. For example, createMotion() in PowerUp field can be called to make power up drops across the screen instead of writing the code every time for every power up. In the level class, where the most functions happen, I refactor some methods out such as setUpScore() and setUpPaddle(). The main class which controls switching of scenes is called "ExampleBounce".  
+
+* However, my code is lacking the refactoring within the level class, specifically, the step method. The step method is way too long and actually I could have taken some parts out. For example, the part that describes all functions of power ups can be refactored out. 
+
+* Another part that my design could do better is to set brick and power up as Super class and categorize different types of bricks and different types of power ups as sub classes. In this way, the structure can be even cleaner. 
+
+* As I have mentioned above, the dependencies among classes and variables are easy to spot but the orders of method call are hard to notice. But the orders of method are hard to avoid. For the dependencies among classes, my code is a bit messy for the dependency between ExampleBounce and Level. The ExampleBounce class calls an instance of level for the first level, then when the level finishes, it calls the ExampleBounce class instance. Then the exampleBounce class needs to call a new instance of level again to continue. So there are two way relations between the exampleBounce and Level class which I find that there is room for improvement. 
+
+4. * One feature is to make the paddle be able to catch the ball and release it later when "R" is pressed. I make this feature available when score is between 200-300. Level and Paddle classes are required to implement this feature.  
+
+
+
+### Alternate Designs
+
+Here is another look at my design:
+
+![This is cool, too bad you can't see it](crc-example.png "An alternate design")
+
+

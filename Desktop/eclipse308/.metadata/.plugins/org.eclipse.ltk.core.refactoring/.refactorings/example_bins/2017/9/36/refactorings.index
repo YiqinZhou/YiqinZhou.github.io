@@ -1,0 +1,4 @@
+1504647046480	Extract constant 'GIGABYTES'
+1504647105375	Extract local variable 'myUsedSize'
+1504648081318	Extract method 'calculateDisksNeeded'
+1504648274349	Extract method 'printDisksUsed'

@@ -1,0 +1,30 @@
+'''
+@author: 
+@date:
+
+@note: 
+
+'''
+
+import sys
+from compsci260lib import *
+
+def solve_plasmid():
+    """Your code goes here..."""
+    dict=get_fasta_dict("plasmid.fasta")
+    for i in range(13):
+        key="read"+str(i+1)
+        print dict[key]
+        
+   
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    solve_plasmid()

@@ -1,0 +1,77 @@
+'''
+@author: 
+@date: 
+
+@note: 
+
+'''
+
+import sys
+import re
+
+from compsci260lib import *
+
+def solve_cloning():
+    """Your code goes here..."""
+    
+    
+
+
+
+
+if __name__ == '__main__':
+    solve_cloning()
+    
+    #a) beginning, end and length of the Cdc24 gene
+    beginning=1000
+    end=3564
+    
+    length_of_gene=end-beginning+1
+    print length_of_gene
+    
+    length_of_peptide_product= (end-beginning+1-3)/3
+    print length_of_peptide_product
+    
+    #b)
+    dict=get_fasta_dict("cdc24_plus_minus_1kb.fasta")
+    
+    upstream=dict['cdc24'][0:1000]
+    downstream=dict['cdc24'][3565:]
+    
+    
+    #BamHI
+    test="ggatccatfggatcc"
+    print([i.start() for i in re.finditer("ggatcc",upstream)]+
+          [i.start() for i+3565 in re.finditer("ggatcc",downstream)])
+    
+   
+    
+    #BstYI
+    print([i.start() for i in re.finditer("[a,g]gatc[c,t]",upstream)]+
+          [i.start() for i+3565 in re.finditer("[a,g]gatc[c,t]",downstream)+3565])
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

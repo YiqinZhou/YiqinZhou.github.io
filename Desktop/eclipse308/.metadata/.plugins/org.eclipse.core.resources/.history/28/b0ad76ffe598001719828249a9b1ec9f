@@ -1,0 +1,41 @@
+'''
+@author: 
+@date:
+
+@note: 
+
+'''
+
+import sys
+from compsci260lib import *
+
+def solve_plasmid():
+    """Your code goes here..."""
+    dict=get_fasta_dict("plasmid.fasta")
+    sequence=""
+    for i in range(14):
+        key="read"+str(i+1)
+        sequence_part=dict[key]
+        length=len(sequence_part)
+  
+        effective_sequence_part=sequence_part[:length-20]
+       
+        sequence=sequence+effective_sequence_part
+    
+    
+    print sequence
+    print len(sequence)
+        
+        
+   
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    solve_plasmid()

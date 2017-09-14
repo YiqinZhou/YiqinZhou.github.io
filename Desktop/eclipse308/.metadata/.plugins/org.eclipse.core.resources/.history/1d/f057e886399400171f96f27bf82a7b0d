@@ -1,0 +1,29 @@
+/**
+ * This class represents the traditional word-guessing game Hangman
+ * that plays interactively with the user.
+ *
+ * @author Robert C. Duvall
+ */
+public class HangmanGameInteractive extends HangmanGameRubrics {
+    // word that is being guessed
+    private String mySecretWord;
+    // how many guesses are remaining
+    private int myNumGuessesLeft;
+    // what is shown to the user
+    private StringBuilder myDisplayWord;
+    // tracks letters guessed
+    private StringBuilder myLettersLeftToGuess;
+
+
+    /**
+     * Create Hangman game with the given dictionary of words to play a game with words 
+     * of the given length and giving the user the given number of chances.
+     */
+    public HangmanGameInteractive (HangmanDictionary dictionary, int wordLength, int numGuesses) {
+        super(dictionary,wordLength,numGuesses);
+    }
+
+}
+
+   
+  

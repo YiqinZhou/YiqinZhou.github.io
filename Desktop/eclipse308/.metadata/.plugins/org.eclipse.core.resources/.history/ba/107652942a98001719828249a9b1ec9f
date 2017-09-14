@@ -1,0 +1,67 @@
+CompSci 308: Game Analysis
+===================
+
+> This is the link to the assignment: [Game](https://coursework.cs.duke.edu/CompSci308_2017Fall/game_yz259)
+
+Project Journal
+=======
+
+### Time Review
+I started the project on Sept 1, finished it on Sept 10 and I used roughly 20 hours for the whole project. 
+
+For the planning, I spent roughly 2 hours. I planned a bit carelessly without thinking of how practical my plan was because at that time I had no idea about how the whole game should be implemented (I could not even distinguish which function would be easier to implement). Then during the first week, I spent about 5 hours to make the basic code functioning. I built my code on the basis of lab, which was a wise choice because there are many similarities between the lab and the Breakout assignment. However, I did not spend enough time thinking beforehand. This made my code have a bad structure and increase the difficulty level of debugging. I put everything together just to make the code work without properly managing the class and the structure. Therefore, after the first 5 hours, when the basic game work, I realized that it was not possible to continue if I would not clean up the code. So I spent next 2 hours cleaning up, extracting classes and commenting my code. At the same time, I added new features bit by bit. I tested along the way, which was a good practice. After adding a new feature, I made sure that it actually worked before proceeding to another feature. I spent a lot of time managing different scenes (switching from one level to another). In the end, it turned out to be not a really difficult task, but I tried a lot of methods and some did not work. I watched tutorials online but they were either outdated or they did not use animation which made my code somewhat unique. I tried for 5 hours and finally it worked. During the whole process, I also encountered two major bugs which took me around 2 hours to debug. One occurred when my ball could not be bounced after touching the paddle. I realized that the speed of the ball was changed to zero before it leaved the paddle. This made the ball stick on to the paddle forever. Another bug was actually stupid: an if condition was met unexpectedly. I spent time debugging by adding print statement and checking line one by one to see possible bugs.
+
+Personally, I managed my code by testing it often. As I have mentioned, I tested the code after each feature was added or a main part was altered. I committed less often, with 14 times in total. I would only commit after a requirement was met (eg. added all three paddle functions). Also, every time I committed, I pushed it to the Gitlab. I think I should commit more often in the future as the commit message and the difference comparison can actually be helpful. There were times when I would like to go back to a certain stage of code, but did not sure about which stage I should go to. If I committed more often, it would be more convenient for me to develop the code. I will definitely make better use of the commit and push tools in the future.
+
+The easiest task for me was to build a specific function. For example, adding the paddle's function to make it catch the ball. Adding the bricks to make it only be cleared after three hits. Those were easy for me because they were specific small tasks. The hardest part was to figure out the whole coding structure so that I could jump from one level to another. I needed to have a clear overview of my whole structure. The good use of my time was to restructure my code. For example, I used to put all stuff in one class, with bricks and paddle as ImageView only. Then I made them into individual classes. This not only made my code cleaner but also helped me to add some functionality. Bad time spent when I was randomly watching some tutorials online which was not applicable. I realized that it would be better to try the code and think the code in my own situation. Without trying, I would never know whether the code would work.
+
+ 
+   
+### Commits
+
+You can put links to commits like this: [My favorite commit](https://coursework.cs.duke.edu/CompSci308_2017Fall/game_yz259/commits/master)
+
+I committed 14 times. On average, the sizes of those commits were big. At first, I did not even have the conscious to commit. So I typically committed after a block of time coding. For example, I committed my code before going to sleep. This made my commit message meaningless and my committed content stick together. The first two commits were "Added plan" and "Basic game worked". These descriptions are accurate, but I think I could have committed more often. I committed more often afterwards, but somewhat random. For example, "added paddle function, fixed multiple hit brick". This commit should have been separated according to two parts. But most messages make sense and do represent my project "story". As I can see from my commits that I start on one level first, making basic game work, then adding different customized functions. By finishing one level, I turned to switch levels and add some final features such as cheat keys. 
+
+One commit is "Refactored level out". The purpose of this commit is straight-forward. I refactored the level class out of the main class. I packaged those changes together because I had a clearer structure for my code at that stage, with main class and level class. Beforehand, I only had one class- the main. I think this size is reasonable as it is very clear about what this commit did and my commit did exactly the same thing.
+
+Another commit is "Added paddle function, fixed multiple hit brick". The purpose of this commit is a bit vague. I added a whole paddle class, added three paddle functions according to different scores and i also made multiple hit bricks. I packaged those changes together without an obvious reason, just because I liked to take a rest and remembered that I have not committed my code. The size is unreasonable with 270 additions and 75 deletions. Even I myself had a hard time figuring out what I did during this commit. It was not only too big, but also too random.
+
+### Conclusions
+
+I estimated the size of this project correctly and managed my time well in general. During my first weekend, I made basic game work. Next week, I added more functions to make one level work. Then during the second weekend, I debugged and finished switching levels. However, I did not expect that I spent so much time on switching levels, which was a quite easy task but I was just confused. I could estimate better by writing out a clear time line. Because this time I was doing the project intuitively without detailed planning. Luckily I figured the switching level part four hours before deadline. But it was not a good idea to wait until the last day to finish such a major problem. I would write out a deadline for specific tasks for my own to manage time better.
+
+
+
+Design Review
+=======
+
+### Status
+
+* Bullets are made with asterisks
+
+1. You can order things with numbers.
+
+### Design
+
+You can put blocks of code in here like this:
+```java
+    /**
+     * Returns sum of all values in given list.
+     */
+    public int getTotal (Collection<Integer> data) {
+        int total = 0;
+        for (int d : data) {
+            total += d;
+        }
+        return total;
+    }
+```
+
+### Alternate Designs
+
+Here is another look at my design:
+
+![This is cool, too bad you can't see it](crc-example.png "An alternate design")
+
+

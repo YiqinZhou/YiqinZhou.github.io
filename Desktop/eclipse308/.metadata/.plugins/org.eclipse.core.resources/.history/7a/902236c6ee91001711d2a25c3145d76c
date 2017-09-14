@@ -1,0 +1,9 @@
+
+public class PowerUp {
+	public int type;
+	
+	public PowerUp(int type) {
+		this.type=type;
+	}
+
+}

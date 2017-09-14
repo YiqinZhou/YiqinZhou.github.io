@@ -1,0 +1,142 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+/**
+ * This class represents the traditional word-guessing game Hangman
+ * that changes the secret word based on the user's history of guesses.
+ *
+ * @author Robert C. Duvall
+ */
+public class HangmanGameCleverExecutioner extends HangmanGameInteractive {
+    // word that is being guessed
+    private String mySecretWord;
+    // how many guesses are remaining
+    private int myNumGuessesLeft;
+    // what is shown to the user
+    private StringBuilder myDisplayWord;
+    // tracks letters guessed
+    private StringBuilder myLettersLeftToGuess;
+    // executioner state
+    private List<String> myRemainingWords;
+
+
+    /**
+     * Create Hangman game with the given dictionary of words to play a game with words 
+     * of the given length and giving the user the given number of chances.
+     */
+    public HangmanGameCleverExecutioner (HangmanDictionary dictionary, int wordLength, int numGuesses) {
+    	   super(dictionary,wordLength,numGuesses);
+    }
+
+    /**
+     * Process a guess by updating the necessary internal state.
+     */
+    
+    @Override
+    
+    public boolean makeGuess (char guess) {
+        // do not count repeated guess as a miss
+        int index = myLettersLeftToGuess.indexOf("" + guess);
+        if (index < 0) {
+            return false;
+        }
+
+        // record guess
+        myLettersLeftToGuess.deleteCharAt(index);
+
+        // create template of guesses and find one with most matching remaining words
+        Map<String, List<String>> templatedWords = new HashMap<>();
+        for (String w : myRemainingWords) {
+            StringBuilder template = new StringBuilder(myDisplayWord);
+            for (int k = 0; k < w.length(); k++) {
+                if (w.toLowerCase().charAt(k) == guess) {
+                    template.setCharAt(k, guess);
+                }
+            }
+            String t = template.toString();
+            if (!templatedWords.containsKey(t)) {
+                templatedWords.put(t, new ArrayList<>());            
+            }
+            templatedWords.get(t).add(w);
+        }
+        String maxKey = null;
+        int max = 0;
+        for (String s : templatedWords.keySet()) {
+            if (templatedWords.get(s).size() > max) {
+                max = templatedWords.get(s).size();
+                maxKey = s;
+            }
+        }
+
+        // update secret word to match template of guesses
+        myRemainingWords = templatedWords.get(maxKey);
+        Collections.shuffle(myRemainingWords);
+        mySecretWord = myRemainingWords.get(0);
+
+        // update displayed knowledge
+        myDisplayWord = new StringBuilder(maxKey);
+
+        // check for guess in secret word
+        if (mySecretWord.toLowerCase().indexOf(guess) < 0) {
+            myNumGuessesLeft -= 1;
+            return false;
+        }
+        return true;
+    }
+    
+    
+    /*
+
+    /**
+     * Play one complete game.
+     /*
+    public void play () {
+     
+        while (!checkGameOver()) {
+            // print game status
+            for (int k = 0; k < myDisplayWord.length(); k++) {
+                System.out.print(myDisplayWord.charAt(k) + " ");
+            }
+            System.out.println();
+            System.out.println("# misses left = " + myNumGuessesLeft);
+            System.out.println("letters not yet guessed = " + myLettersLeftToGuess);
+            // NOT PUBLIC, but makes it easier to test
+            System.out.println("*** " + mySecretWord);        
+            System.out.println();
+
+            // handle guess
+            String guess = ConsoleReader.promptString("Make a guess: ");
+            
+            
+            if (guess.length() == 1 && Character.isAlphabetic(guess.charAt(0))) {
+                makeGuess(guess.toLowerCase().charAt(0));
+            }
+            else {
+                System.out.println("Please enter a single letter ...");
+            }
+
+          
+           
+        }
+        System.out.println("The secret word was " + mySecretWord);
+    }
+
+     //Check for end of the game, make the code clearer
+	private boolean checkGameOver() {
+		if (myNumGuessesLeft == 0) {
+		    System.out.println("YOU ARE HUNG!!!");
+		    return true;
+		}
+		else if (mySecretWord.equals(String.join("", myDisplayWord))) {
+		    System.out.println("YOU WIN!!!");
+		    return true;
+		}
+		return false;
+	}
+	
+	*/
+}

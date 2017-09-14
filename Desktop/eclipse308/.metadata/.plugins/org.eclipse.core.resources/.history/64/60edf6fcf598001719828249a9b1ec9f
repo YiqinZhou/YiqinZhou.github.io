@@ -1,0 +1,173 @@
+public void step(double elapsedTime) {
+	
+		moveBouncer(myBouncer1, myVelocity1, elapsedTime);
+		checkCollisionWithBorder(myBouncer1.getX(),myBouncer1.getY());
+
+		if (checkCollisionWithBottom()) {
+			life = life - 1;
+			if (life == 0) {
+				transitionToLose();
+			}
+			updateScoreText();
+			resetGame();
+
+		}
+
+		if (!checkCollisionWithPaddle()) {
+			paddle.setCatchby(false);
+			rememberVelocity = new Point2D(myVelocity1.getX(), myVelocity1.getY());
+		}
+
+		if (checkCollisionWithPaddle()) {
+
+			// extra paddle power: hold the ball and release afterwards
+			if (score >= 200 && score < 300 && paddle.getCatchby() == false) {
+				myVelocity1 = new Point2D(0, 0);
+			}
+			else {
+				myVelocity1 = new Point2D(myVelocity1.getX(), -myVelocity1.getY());
+			}
+
+		}
+
+		// ball hits the bricks
+		int count = 0;
+
+		for (int i = 0; i < bricks.length; i++) {
+			if (bricks[i].getImage().isVisible() == false) {
+				count = count + 1;
+			}
+			if (checkCollisionWithBrick(i)
+					&& bricks[i].getImage().isVisible() == true) {
+					
+				// hit by once and cleared, 10 points
+				if (bricks[i].getType() == 1) {
+					bricks[i].getImage().setVisible(false);
+					addedScore(10);
+
+				}
+
+				// hit three times to clear, each hit worths 10 points, final clearance 30
+				// points
+	
+				if (bricks[i].getType() == 2 && bricks[i].getPreviousHit() == false) {
+					// brick is never hit
+					if (bricks[i].getOpacity() == 1.0) {
+						addedScore(10);
+						bricks[i].setOpacity(0.6);
+					}
+
+					// brick is hit once
+					else if (bricks[i].getOpacity() == 0.6) {
+						addedScore(10);
+						bricks[i].setOpacity(0.3);
+					}
+
+					// brick is hit twice
+					else if (bricks[i].getOpacity() == 0.3) {
+						bricks[i].getImage().setVisible(false);
+						addedScore(30);
+					}
+
+				}
+
+				// drop Power-ups, each worths 20 points
+				if (bricks[i].getType() == 3) {
+					bricks[i].getImage().setVisible(false);
+					addedScore(20);
+					addedPowerUp(i);
+
+				}
+
+				bricks[i].setPreviousHit(true);
+
+			}
+
+			else {
+				bricks[i].setPreviousHit(false);
+			}
+
+		}
+
+
+		// all bricks clear
+		if (count == bricks.length) {
+			transitionToWin();
+		}
+
+	}
+
+	private void transitionToWin() {
+		animation.stop();
+		ExampleBounce test = new ExampleBounce();
+		test.winScene(levelNumber);
+		
+	}
+
+	private void addedPowerUp(int i) {
+		double Xord = bricks[i].getImage().getX() + 15;
+		double Yord = bricks[i].getImage().getY() + 20;
+		PowerUp power = bricks[i].powerUp(Xord, Yord);
+		currentPowerUp.add(power);
+		root.getChildren().add(power.getImage());
+	}
+
+	private void addedScore(int addition) {
+		score = score + addition;
+		updateScoreText();
+	}
+
+	private boolean checkCollisionWithBrick(int i) {
+		return myBouncer1.getBoundsInParent().intersects(bricks[i].getImage().getBoundsInParent());
+	}
+
+	private boolean checkCollisionWithPaddle() {
+		return myBouncer1.getBoundsInParent().intersects(paddle.getImage().getBoundsInParent());
+	}
+
+	private boolean checkCollisionWithBottom() {
+		return myBouncer1.getY() > myScene.getHeight() - myBouncer1.getBoundsInLocal().getHeight();
+	}
+
+	private void resetGame() {
+		paddle.setXord(SIZE / 2 - paddle.getImage().getFitWidth() / 2);
+		paddle.setYord(SIZE - paddleApartFromBottom);
+		myBouncer1.setX(SIZE / 2 - myBouncer1.getFitWidth() / 2);
+		myBouncer1.setY(SIZE - paddleApartFromBottom - myBouncer1.getFitHeight());
+		gameStart = false;
+		myVelocity1 = new Point2D(0, 0);
+		
+	}
+
+	private void transitionToLose() {
+		animation.stop();
+		gameStart = false;
+		ExampleBounce test = new ExampleBounce();
+		test.loseScene(levelNumber);
+		
+	}
+
+	private void checkCollisionWithBorder(double x, double y) {
+		if (x < 0 || x > myScene.getWidth() - myBouncer1.getBoundsInLocal().getWidth()) {
+			myVelocity1 = new Point2D(-myVelocity1.getX(), myVelocity1.getY());
+		}
+		if (y < 0) {
+			myVelocity1 = new Point2D(myVelocity1.getX(), -myVelocity1.getY());
+		}
+		
+	}
+
+	private boolean reachBottom(
+			PowerUp current) {
+		return current.getYord() > myScene.getHeight() - current.getImage().getBoundsInLocal().getHeight();
+	}
+
+	private void updateScoreText() {
+		scoreText.setText("Score: " + score + "   Life: " + life + "   Level: " + levelNumber);
+	}
+
+	// Move a bouncer based on its velocity
+	private void moveBouncer(ImageView bouncer, Point2D velocity, double elapsedTime) {
+		bouncer.setX(bouncer.getX() + velocity.getX() * elapsedTime);
+		bouncer.setY(bouncer.getY() + velocity.getY() * elapsedTime);
+	}
