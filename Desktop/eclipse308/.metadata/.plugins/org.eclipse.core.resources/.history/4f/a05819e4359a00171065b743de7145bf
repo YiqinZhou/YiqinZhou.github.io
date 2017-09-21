@@ -1,0 +1,238 @@
+'''
+@author: 
+@date:
+
+@note: 
+
+'''
+
+import sys
+from compsci260lib import *
+
+def find_genes(sequence, min_length_aa):
+    
+
+    
+    sequence=sequence+sequence
+    start_codon=[i.start() for i in re.finditer("atg",sequence)]
+    stop_codon=[i.start() for i in re.finditer("[tu]a[ag]|[tu]ga",sequence)]
+    stop_codon.sort()
+    start_codon.sort()
+  
+    list=[]
+    
+    for i in range(len(stop_codon)):
+        
+        #count from the stop codon in second sequence
+        if stop_codon[i]>len(sequence)/2:
+  
+            
+            this_stop_codon=stop_codon[i]
+       
+     
+            potential=stop_codon[:i]
+            for k in potential[::-1]: 
+           
+                
+                if (k%3)==(this_stop_codon%3):
+             
+                    previous_stop_codon=k
+                    
+                    break
+     
+        
+       
+            
+            for j in start_codon:
+            
+            #find the first start codon during the range.
+        
+                if j>=previous_stop_codon and j<this_stop_codon and (j%3)==(this_stop_codon%3):
+               
+                    if this_stop_codon-j+1>=min_length_aa*3:
+                        
+                        # start might be in first sequence or second sequence
+                        if j>len(sequence)/2:
+                            start_position=j+1-len(sequence)/2
+                        else:
+                            start_position=j+1
+                        
+                        #stop will always be in second sequence   
+                        stop_position=this_stop_codon+3-len(sequence)/2
+                        dict={}
+                        dict['frame']=j%3
+                        dict['stop']=stop_position
+                        dict['aalength']=(this_stop_codon-j+1)/3
+                        dict['start']=start_position
+                        dict['stopcodon']=sequence[this_stop_codon:this_stop_codon+3]
+                        dict['nlength']=(this_stop_codon-j+3)
+                        list.append(dict)
+                    
+                    
+                    
+                    break
+    
+    
+    newlist = sorted(list, key=lambda k: k['frame'])    
+    return newlist  
+
+    
+  
+ 
+
+
+
+def solve_plasmid():
+    """Your code goes here..."""
+    
+    #b)
+    dict=get_fasta_dict("plasmid.fasta")
+    
+    # find the original total length of all reads
+    sum=0
+    for i in dict:
+        sum=sum+len(dict[i])
+    print "Original total length is: "+str(sum)
+    
+    #randomly set read4 as the first sequence
+    sequence=dict['read6']  
+    current='read6'
+    del dict[current]
+    while len(dict)>0:
+        # use a loop to find the next sequence
+        for i in dict:
+            if current!=i and dict[i][:20]==sequence[-20:]:
+                sequence=sequence+dict[i][20:]
+                del dict[i]
+                current=i
+                break
+    #the last sequence needs to cut off the tail as it coincides with the head of the first sequence (circular)
+    sequence=sequence[:-20]         
+    
+    print "the assembly sequence is: "+str(sequence)
+    print "Length of sequence is: "+str(len(sequence))
+    
+    #c)
+    reverseStrand=""
+    for i in sequence:
+        if (i=="c"):
+            reverseStrand=reverseStrand+"g";
+        if (i=="g"):
+            reverseStrand=reverseStrand+"c";
+        if (i=="a"):
+            reverseStrand=reverseStrand+"t";
+        if (i=="t"):
+            reverseStrand=reverseStrand+"a";
+    reverseStrand=reverseStrand[::-1]
+
+    forward_total=find_genes(sequence, 40)
+    reverse_total=find_genes(reverseStrand,40)
+    total=[]
+    
+    #create a dictionary that is together
+    for i in forward_total:
+        total.append(i)
+    for i in reverse_total:
+        i['start']=len(sequence)-i['start']
+        i['stop']=len(sequence)-i['stop']
+        total.append(i)
+       
+    
+    total = sorted(total, key=lambda k: k['frame'])    
+    
+    print "The details of all ORFs with a minimum length of 40 are shown below:"
+    for i in total:
+        print i
+    print "The number of ORFs I find is: "+str(len(total))
+    
+    
+    #c) Computer fraction of the genome that is coding
+    
+    array=[]
+    for i in range(len(sequence)):
+        array.append(0)
+    
+    
+    for i in range(len(forward_total)):
+        
+        start=forward_total[i]["start"]
+        stop=forward_total[i]["stop"]
+     
+        if stop>start:
+            for q in range(start-1,stop-3):
+                array[q]=1
+        else:
+           
+          
+            for q in range(0,stop-3):
+                array[q]=1
+            for q in range(start-1,len(sequence)):
+                array[q]=1
+                
+                
+                
+    for i in range(len(reverse_total)):
+        
+        start=reverse_total[i]["start"]
+        stop=reverse_total[i]["stop"]
+     
+        if stop<start:
+            for q in range(stop+2,start):
+                array[q]=1
+        else:
+          
+           
+            for q in range(0,start):
+                array[q]=1
+            for q in range(stop+2,len(sequence)):
+                array[q]=1
+    
+    count=0
+    for p in range(len(array)):
+        if array[p]==1:
+            count+=1
+    
+            
+    fraction=float(count)/len(sequence)
+    print "The fraction of the genome that is coding is: "+str(fraction)
+    
+    # list of the lengths of all ORFs
+    new_dict = sorted(total, key=lambda k: k['aalength']) 
+    lengths=[]
+    for i in new_dict:
+        lengths.append(i['aalength'])
+    
+    #d)
+    #the longest ORF
+    ORF_info=new_dict[-1]
+    ORF_start=ORF_info['start']
+    ORF_stop=ORF_info['stop']
+    ORF=sequence[ORF_start-1:ORF_stop]
+    
+    
+    #translate in to amino acid sequence
+    print "Translation of the largest ORF is: "+str(translate(ORF))
+    
+    
+    list=[48, 838, 103, 67, 66, 49, 57, 55, 52, 42, 40, 88, 56, 
+   49, 192, 368, 101, 40, 58, 42, 66, 56, 43, 286, 44, 51, 50]
+    list.sort()
+    print list
+
+    
+    
+    
+        
+        
+   
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    solve_plasmid()

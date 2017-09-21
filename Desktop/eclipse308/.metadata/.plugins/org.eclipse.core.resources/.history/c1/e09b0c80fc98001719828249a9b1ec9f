@@ -1,0 +1,156 @@
+'''
+@author: 
+@date:
+
+@note:
+
+'''
+
+import sys, random
+from compsci260lib import *
+
+#b) function
+def find_genes(sequence, min_length_aa):
+    
+    start_codon=[i.start() for i in re.finditer("aug",sequence)]
+    stop_codon=[i.start() for i in re.finditer("uag",sequence)]+[i.start() for i in re.finditer("uga",sequence)]+[i.start() for i in re.finditer("uaa",sequence)]
+    stop_codon.sort()
+   
+  
+    list=[]
+    
+    for i in range(len(stop_codon)):
+  
+        previous_stop_codon=0
+        this_stop_codon=stop_codon[i]
+       
+        if i!=0:
+            potential=stop_codon[:i]
+            for k in potential[::-1]: 
+           
+                
+                if (k%3)==(this_stop_codon%3):
+             
+                    previous_stop_codon=k
+                    
+                    break
+     
+        
+       
+            
+        for j in start_codon:
+        
+            if j>=previous_stop_codon and j<this_stop_codon and (j%3)==(this_stop_codon%3):
+               
+                if this_stop_codon-j+1>=min_length_aa*3:
+                    
+                    stop_position=this_stop_codon+3
+                    start_position=j+1
+                    dict={}
+                    dict['frame']=j%3
+                    dict['stop']=stop_position
+                    dict['aalength']=(this_stop_codon-j+1)/3
+                    dict['start']=start_position
+                    dict['stopcodon']=sequence[this_stop_codon:this_stop_codon+3]
+                    dict['nlength']=(stop_position-start_position+1)
+                    list.append(dict)
+                    
+                    
+                    
+                break
+    
+    
+    newlist = sorted(list, key=lambda k: k['frame'])    
+    return newlist  
+ 
+    #c)
+def find_mean(list):
+    all_length=0.0
+    for i in list:
+        all_length+=(i['aalength'])
+    return all_length/len(list)
+
+    #e)
+def random_amino_acid(amino_acid):
+    aa_list=[]
+    for i in codon_to_aa_dict:
+        if codon_to_aa_dict.get(i)!=amino_acid and i!="[TU]A[AG]|[TU]GA":
+            aa_list.append((codon_to_aa_dict.get(i)))
+    
+    len_dict=len(aa_list)
+    number=random.randint(0,len_dict-1)
+    return aa_list[number]
+    
+def random_nucleotide(nucleotide):
+    list=['a','u','g','c']
+    # cannot be the same as input
+    list.remove(nucleotide)
+    number=random.randint(0,2)
+    return list[number]
+    
+                    
+          
+
+def solve_orfs():
+    """Your code goes here..."""
+    
+    
+    #b)
+    print "Part B solution"
+    dict=get_fasta_dict("sars.fasta")
+    sequence=dict["sars"]
+    list_10=find_genes(sequence,10)
+    list_40=find_genes(sequence,40)
+    list_70=find_genes(sequence,70)
+    print "ORFs I find if the minimum ORF length 10 amino acids: "+str(len(list_10))
+    print "ORFs I find if the minimum ORF length 40 amino acids: "+str(len(list_40))
+    print "ORFs I find if the minimum ORF length 70 amino acids: "+str(len(list_70))
+        
+    
+    #c)
+    print "Part C solution"
+    print "The average length of the identified ORFs for 10 minimum is: "+str(find_mean(list_10))
+    print "The average length of the identified ORFs for 40 minimum is: "+str(find_mean(list_40))
+    print "The average length of the identified ORFs for 70 minimum is: "+str(find_mean(list_70))
+    
+    #e)
+    print "Part E solution"
+    sorted_list_40= sorted(list_40, key=lambda k: k['start'])
+    ORF_info=sorted_list_40[2]
+    ORF_start=ORF_info['start']
+    ORF_stop=ORF_info['stop']
+    ORF=sequence[ORF_start-1:ORF_stop]
+    ORF_length=len(ORF)
+    list_ORF=list(ORF)
+    
+    for i in range(10):
+        number=random.randint(0,ORF_length-1)
+        list_ORF[number]=random_nucleotide(ORF[number])
+        new_ORF="".join(list_ORF)
+        print "Now the protein sequence by changing random nucleotide is: "+translate(new_ORF)
+    
+    original_protein=translate(ORF) 
+    list_protein=list(original_protein)   
+    for j in range(10):
+        number=random.randint(0,len(original_protein)-1)
+        list_protein[number]=random_amino_acid(list_protein[number])
+        new_protein="".join(list_protein)
+        print "Now the protein sequence by changing random amino acid is: "+translate(new_ORF)
+    
+        
+    
+        
+    
+   
+    
+
+
+
+
+
+
+
+
+	
+if __name__ == '__main__':
+    solve_orfs()

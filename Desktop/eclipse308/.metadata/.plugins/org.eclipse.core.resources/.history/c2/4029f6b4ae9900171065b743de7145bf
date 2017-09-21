@@ -1,0 +1,15 @@
+Course: COMPSCI 260
+Name: Yiqin Zhou
+NetID: yz259
+Problem: 3
+Problem Set: 1
+Due: Fri 15 Sep 2017, 5pm
+Using free extension (yes/no): no
+
+Statement of collaboration and resources used (put None if you worked 
+entirely without collaboration or resources; otherwise cite carefully):
+
+My solutions and comments for this problem are below.
+-----------------------------------------------------
+a) I could put all reads into dictionary. Start the assembly from a random read (it does not matter
+   which )

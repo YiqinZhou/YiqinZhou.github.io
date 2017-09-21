@@ -1,0 +1,80 @@
+Course: COMPSCI 260
+Name: Yiqin Zhou
+NetID: yz259
+Problem: 1
+Problem Set: 1
+Due: Fri 15 Sep 2017, 5pm
+Using free extension (yes/no): no
+
+Statement of collaboration and resources used (put None if you worked 
+entirely without collaboration or resources; otherwise cite carefully):
+None
+
+My solutions and comments for this problem are below.
+-----------------------------------------------------
+a) The location for the beginning of the code is stored in the variable 'beginning' 
+   and the location for the end of the code is stored in the variable 'end'.
+   The length of the Cdc24 gene is 3565-1001+1=2565. (Stored in the variable 'length_of_gene') .
+   The length of Cdc24's peptide product is (2565-3)/3=854 (Stored in the variable 'length_of_peptide_product')
+   because every triple will translate into one amino acid, 
+   but we need to exclude the stop codon because it will not have corresponding amino acid but just stop.
+   The function of this protein is: Guanine nucleotide exchange factor (GEF) for Cdc42p; 
+   it is required for polarity establishment and maintenance.
+   
+b) Yes, the actual sequence which is recognized by each enzyme is reported and the position is reported. 
+   The reverse strand positions are reported according to the original strand index.
+   As shown by the result of the code, the regions upstream and downstream of the Cdc24 gene contain BamHI, BstYI, SpeI, SphI, but does not contain StyI. 
+   The specific results are: for BamHI, the location is 860, with actual sequence "ggatcc" (the result in code prints the same location and same sequence twice because it is palindromic).
+   for BstYI, for the original strand, the locations are 860, 3626, with actual sequence "ggatcc", "ggatct" respectively. For reverse, there is another sequence "agatcc" though at the same location 3626. It is not palindromic thus might have different sequence. 
+   One location of BstYI coincides with the BamHI because they are actually the same sequence.
+   for SpeI, the location is 3574, with actual sequence "actagt".
+   for SphI, the locations are 259, 3988, 4315, with actual sequence "gcatgc".
+   for StyI, it is not found.
+   Same restriction sites and the exact sequence will possibly report twice because I loop through both the original strand and the reverse strand. If the sequence is palindromic, the situation will happen. However, it is easy to spot. This is the trade-off between using the general method and hard code.
+  
+c) Integrating plasmids can integrate into the host chromosome. A plasmid is a small, circular, double-stranded DNA molecule that is distinct from a cell's chromosomal DNA. Often the genes carried in plasmids provide cell with genetic advantages.
+   An ampicillin resistance gene is used to indicate whether the bacteria or cell has plasmids. It codes for an enzyme (b-lactamase) that is secreted into the periplasmic space of the bacterium where it catalyzes hydrolysis of the b-lactam ring of the ampicillin. Thus, the gene product of the ampr gene destroys the antibiotic. 
+   A lacZ gene enables transport of lactose into the cell. The lacZ gene codes for β–galactosidase, an enzyme normally used by E. coli to digest lactose. Bacteria with a functional lacZ gene will produce a blue color when grown in the presence of Xgal. 
+   A replication origin is a particular sequence in a genome at which replication is initiated.
+   A multiple cloning site is a short segment of DNA which contains several restriction sites allowing for the easy insertion of DNA. After the insertion of DNA, lacZ would be cut and thus the blue color will no longer be present.
+   An auxotrophic marker encodes certain types of enzymes. Its existence in plasmids can be helpful for bacteria's survival.
+   
+d) This will not be true when restriction enzyme StyI because the sticky end is CwwG. "ww" can be different. Whenever "ww" are not the same for two sites, they are not compatible. For example, for sequence CCATGG, the sticky end is CATG; but for sequence CCAAGG, the sticky end is CAAG. They are not compatible. 
+   Restriction sites produced by BamHI and BstYI are always compatible because sticky end is always  "GATC".
+   Restriction sites produced by StyI and SphI if ww is "AT" are also compatible with sticky end "CATG".
+   As the result of the code, BamHI ("ggatcc"), BstYI ("ggatcc") and SpeI("actagt") are in the pRS304 MCS. 
+   Based on result on part (b), 
+   
+   Cut plasmid on 1923, result would be:
+   g| gatc c
+   c  ctag |g
+   
+   Thus, Cdc24 gene could use "ggatcc" on 860 and "ggatct" on 3626.
+   
+   But if cut plasmid on 1917, result would be:
+   
+   a| ctag t
+   t  gatc |a
+   
+   But there is only one restriction site for SpeI in Cdc24. So cannot cut twice.
+   
+   Therefore, I would use 1923 "ggatcc" on plasmid;  "ggatcc" at 860 and "ggatct" at 3626 on Cdc24 gene.
+
+e) For Cdc24. first cut after first g at 860, so should cut at 861 position. This gives a Python index of 860.
+   end part should cut after first f at 3626, so should cut at 3627 to include the g. This means a python index of 3626.
+   So the original strand should cut at [860:3626].
+   For reverse, first cut after first g for sequence "cctagg", that is at position 865, with a python index of 864.
+   Second cut after first g for sequence "cctagg", that is position 3631, with a python index of 3630.
+   So strand should be [864:3630].
+   
+   In conclusion, the nucleotide positions for the beginning and end of excised gene for original strand are 861 and 3626,
+   for reverse strand beginning and end are 865 and 3630.
+   The sequence is stored in variable "origin_strand_part".
+ 
+ f) The length of the plasmid is 7033. Just use the plasmid original length plus the length of the extracted gene part. 
+   
+
+
+   
+   
+   

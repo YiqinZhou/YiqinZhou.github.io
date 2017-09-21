@@ -1,0 +1,36 @@
+Course: COMPSCI 260
+Name: Yiqin Zhou
+NetID: yz259
+Problem: 3
+Problem Set: 1
+Due: Fri 15 Sep 2017, 5pm
+Using free extension (yes/no): no
+
+Statement of collaboration and resources used (put None if you worked 
+entirely without collaboration or resources; otherwise cite carefully):
+None
+
+My solutions and comments for this problem are below.
+-----------------------------------------------------
+a) I could put all reads into dictionary. Start the assembly from a random read (it does not matter
+   which reas since it is circular) and check the last 20 nucleotides and find the match with another read's first 20.
+   Once the next read is found, this read is removed from the dictionary. Therefore, I don't need to 
+   know the length of dictionary. Just set a while loop with condition len(dict)>0. The challenging part is to
+   loop through the dictionary and find the next read that matches. To deal with those potential obstacles,
+   I can set up a while loop so that it can keep checking every read, finding the match. Also, the algorithm
+   needs to deal with the overlapping. The code needs not be changed for the number of reads and the average
+   read length. For my current code, it needs to change when the degree of reads overlap changes. But it is 
+   easy to deal with this, just pass the overlap number as a parameter to a function (I am not doing this
+   because I did not set up part b) as a separate function. Instead, I put the code inside the main).  
+ 
+b)  This length makes sense. 
+
+
+
+
+
+
+
+
+
+

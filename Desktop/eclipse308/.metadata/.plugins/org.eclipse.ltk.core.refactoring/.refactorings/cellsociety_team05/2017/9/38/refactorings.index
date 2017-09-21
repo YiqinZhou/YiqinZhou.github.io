@@ -1,0 +1,7 @@
+1505790680714	Rename type 'cellsociety'
+1505791076419	Encapsulate field 'array'
+1505839504417	Encapsulate field 'type'
+1506015484923	Encapsulate field 'state'
+1506015492306	Encapsulate field 'image'
+1506015497751	Encapsulate field 'imageView'
+1506015504847	Encapsulate field 'neighborCells'

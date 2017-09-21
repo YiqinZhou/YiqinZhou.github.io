@@ -1,0 +1,223 @@
+'''
+@author: 
+@date: 
+
+@note: 
+
+'''
+
+import sys
+import re
+
+from compsci260lib import *
+
+def find_restriction_sites(dictname,key,beginning,end,name,reversename):
+    dict=get_fasta_dict(dictname)
+    
+
+    upstream=dict[key][0:beginning-1]
+    downstream=dict[key][end:]
+    
+        #Reverse DNA strand starting with 3'
+    reverseStrand=""
+    for i in dict[key]:
+        if (i=="c"):
+            reverseStrand=reverseStrand+"g";
+        if (i=="g"):
+            reverseStrand=reverseStrand+"c";
+        if (i=="a"):
+            reverseStrand=reverseStrand+"t";
+        if (i=="t"):
+            reverseStrand=reverseStrand+"a";
+            
+    reverseUpstream= reverseStrand[:beginning-1]
+    reverseDownstream=reverseStrand[end:] 
+    
+    
+  
+    location=([i.start()+1 for i in re.finditer(name,upstream)]+
+          [i.start()+end+1 for i in re.finditer(name,downstream)]+
+           [i.start()+1 for i in re.finditer(reversename,reverseUpstream)]+
+           [i.start()+end+1 for i in re.finditer(reversename,reverseDownstream)])
+    
+
+    Sequence=([i for i in re.findall(name,upstream)]+
+          [i for i in re.findall(name,downstream)]+
+           [list(i) for i in re.findall(reversename,reverseUpstream)]+
+           [i for i in re.findall(reversename,reverseDownstream)])
+    
+
+        
+    
+    
+    print "Locations are "+str(location)
+    print "Actual sequences are "+str(Sequence)
+
+def find_restriction_sites_d(dictname,key,beginning,end,name,reversename):
+    dict=get_fasta_dict(dictname)
+    
+
+    effective=dict[key][beginning-1:end]
+ 
+    
+        #Reverse DNA strand starting with 3'
+    reverseStrand=""
+    for i in dict[key]:
+        if (i=="c"):
+            reverseStrand=reverseStrand+"g";
+        if (i=="g"):
+            reverseStrand=reverseStrand+"c";
+        if (i=="a"):
+            reverseStrand=reverseStrand+"t";
+        if (i=="t"):
+            reverseStrand=reverseStrand+"a";
+            
+    reverse= reverseStrand[beginning-1:end]
+    
+    
+    
+  
+    location=([i.start()+beginning for i in re.finditer(name,effective)]+
+     
+           [i.start()+beginning for i in re.finditer(reversename,reverse)])
+    
+
+    Sequence=([i for i in re.findall(name,effective)]+
+          
+           [i for i in re.findall(reversename,reverse)])
+    
+    print "Locations are "+str(location)
+    print "Actual sequences are "+str(Sequence)
+    
+def solve_cloning():
+    """Your code goes here..."""
+    
+     #a) beginning, end and length of the Cdc24 gene
+     
+    print "Part A solution"
+    beginning=1001
+    end=3565
+    
+    length_of_gene=end-beginning+1
+    print "Length of gene is "+str(length_of_gene)
+    
+    length_of_peptide_product= (end-beginning+1-3)/3
+    print "Length of peptide product is "+str(length_of_peptide_product)
+    
+    #b)
+    print "Part B solution"
+    
+    dict=get_fasta_dict("cdc24_plus_minus_1kb.fasta")
+    
+    #BamHI
+    print "For BamHI: "
+    find_restriction_sites("cdc24_plus_minus_1kb.fasta",'cdc24',beginning,end,"ggatcc","cctagg")
+    
+    
+    #BstYI   
+    print "For BstYI: " 
+    find_restriction_sites("cdc24_plus_minus_1kb.fasta",'cdc24',beginning,end,"[a,g]gatc[c,t]","[c,t]ctag[a,g]")
+    
+    
+    #SpeI 
+    print "For SpeI: " 
+    find_restriction_sites("cdc24_plus_minus_1kb.fasta",'cdc24',beginning,end,"actagt","tgatca")
+    
+    
+    #SphI  
+    print "For SphI: " 
+    find_restriction_sites("cdc24_plus_minus_1kb.fasta",'cdc24',beginning,end,"gcatgc","cgtacg")
+    
+    #styI, not palindromic, need to check both
+    print "For StyI: " 
+    find_restriction_sites("cdc24_plus_minus_1kb.fasta",'cdc24',beginning,end,"cc[a,t][a,t]gg","gg[a,t][a,t]cc")
+    
+    #d) 
+    print "Part D solution"
+    
+    pRS_begin=1887
+    pRS_end=1994
+    
+    
+    
+     #BamHI
+    print "For BamHI: "
+    find_restriction_sites_d("pRS304.fasta",'pRS304',pRS_begin,pRS_end,"ggatcc","cctagg")
+    
+    
+    #BstYI   
+    print "For BstYI: " 
+    find_restriction_sites_d("pRS304.fasta",'pRS304',pRS_begin,pRS_end,"[a,g]gatc[c,t]","[c,t]ctag[a,g]")
+    
+    
+    #SpeI 
+    print "For SpeI: " 
+    find_restriction_sites_d("pRS304.fasta",'pRS304',pRS_begin,pRS_end,"actagt","tgatca")
+    
+    
+    #SphI  
+    print "For SphI: " 
+    find_restriction_sites_d("pRS304.fasta",'pRS304',pRS_begin,pRS_end,"gcatgc","cgtacg")
+    
+    #styI, not palindromic, need to check both
+    print "For StyI: " 
+    find_restriction_sites_d("pRS304.fasta",'pRS304',pRS_begin,pRS_end,"cc[a,t][a,t]gg","gg[a,t][a,t]cc")
+    
+    #e)
+    print "Part E solution"
+    dict=get_fasta_dict("cdc24_plus_minus_1kb.fasta")
+    origin_strand_part=dict['cdc24'][860:3626]
+    reverseStrand=""
+    for i in dict['cdc24']:
+        if (i=="c"):
+            reverseStrand=reverseStrand+"g"
+        if (i=="g"):
+            reverseStrand=reverseStrand+"c"
+        if (i=="a"):
+            reverseStrand=reverseStrand+"t"
+        if (i=="t"):
+            reverseStrand=reverseStrand+"a"
+            
+   
+    reverse_strand_part=reverseStrand[864:3630]
+    print("origin sequence for Cdc24 gene is: "+str(origin_strand_part))
+    print("reverse sequence for Cdc24 gene is: "+str(reverse_strand_part))
+    
+    #f)
+    print "Part F solution"
+    dict_plasmid=get_fasta_dict("pRS304.fasta")
+    strand_plasmid=dict_plasmid['pRS304']
+    original_plasmid_length=len(strand_plasmid)
+    plasmid_length=original_plasmid_length+len(origin_strand_part)
+    print("Plasmid length now is: "+str(plasmid_length))
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+if __name__ == '__main__':
+    solve_cloning()
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

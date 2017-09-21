@@ -1,0 +1,39 @@
+package cellsociety_team05;
+
+public class SimulationSegregation {
+	
+	private int[][] array;      //0 is empty, 1 is red, 2 is blue
+	private double percentage;
+	
+	public SimulationSegregation(double cellNumberHorizontal, double cellNumberVertical, double percentage) {
+		//set up instance variables, put 0s in every cell
+		
+	}
+	
+	public int[][] initializeScene() {
+		//according to percentage, do random function
+		//call cell to changeState, 
+
+		
+	}
+	
+	public void step() {
+		//set up a loop, go through every cell
+		//call whetherSatisfied
+		
+	}
+	
+	
+
+	public int[][] getArray() {
+		return array;
+	}
+
+	public void setArray(
+			int[][] array) {
+		this.array = array;
+	}
+	
+	
+
+}

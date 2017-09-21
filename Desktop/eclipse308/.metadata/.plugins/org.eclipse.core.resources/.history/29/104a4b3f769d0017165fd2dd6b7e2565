@@ -1,0 +1,51 @@
+package cellsociety_team05;
+
+import java.util.Random;
+
+public class SimulationSegregation {
+	
+	private CellSociety[][] array;      
+	private double percentage;
+	private int numberOfCells;
+	
+	public SimulationSegregation(int cellNumberHorizontal, int cellNumberVertical, double percentage) {
+		//set up instance variables, put 0s in every cell
+		array=new CellSociety [cellNumberHorizontal][cellNumberVertical];
+		this.percentage=percentage;
+		this.numberOfCells=cellNumberHorizontal*cellNumberVertical;
+		
+		
+	}
+	
+	public void initializeScene() {
+		//according to percentage, do random function
+		//call cell to change type 
+		int[] randomList=
+		Random rand=new Random();
+		
+		
+		
+
+		
+	}
+	
+	public void step() {
+		//set up a loop, go through every cell
+		//call whetherSatisfied
+		
+	}
+	
+	
+
+	public CellSociety[][] getArray() {
+		return array;
+	}
+
+	public void setArray(
+			CellSociety[][] array) {
+		this.array = array;
+	}
+	
+	
+
+}

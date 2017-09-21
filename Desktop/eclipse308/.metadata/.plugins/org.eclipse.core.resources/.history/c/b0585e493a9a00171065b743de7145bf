@@ -1,0 +1,54 @@
+Course: COMPSCI 260
+Name: Yiqin Zhou
+NetID: yz259
+Problem: 3
+Problem Set: 1
+Due: Fri 15 Sep 2017, 5pm
+Using free extension (yes/no): no
+
+Statement of collaboration and resources used (put None if you worked 
+entirely without collaboration or resources; otherwise cite carefully):
+None
+
+My solutions and comments for this problem are below.
+-----------------------------------------------------
+a) I could put all reads into dictionary. Start the assembly from a random read (it does not matter
+   which reas since it is circular) and check the last 20 nucleotides and find the match with another read's first 20.
+   Once the next read is found, this read is removed from the dictionary. Therefore, I don't need to 
+   know the length of dictionary. Just set a while loop with condition len(dict)>0. The challenging part is to
+   loop through the dictionary and find the next read that matches. To deal with those potential obstacles,
+   I can set up a while loop so that it can keep checking every read, finding the match. Also, the algorithm
+   needs to deal with the overlapping. The code needs not be changed for the number of reads and the average
+   read length. For my current code, it needs to change when the degree of reads overlap changes. But it is 
+   easy to deal with this, just pass the overlap number as a parameter to a function (I am not doing this
+   because I did not set up part b) as a separate function. Instead, I put the code inside the main).  
+ 
+b)  This length makes sense. The original total length is 8821, there are 14 overlaps because it is circular.
+    each overlap is 20 nucleotides long. Thus, the assembly length should be 8821-14*20=8541.
+    
+c) I find 27 ORFs. I sort their lengths and get the list as shown in the code. 
+   Their lengths in amino acids are: [40, 40, 42, 42, 43, 44, 48, 49, 49, 50, 51, 52, 55, 56, 56, 57, 58, 66, 66, 67, 88, 101, 103, 192, 286, 368, 838]. 
+   Longest length is 838 amino acids long.
+   
+   There exists ORFs that overlap other ORFs. In order to find the overlap, I sort the dictionary according to 'start'.
+   For example, 
+   {'frame': 1, 'stop': 4690, 'aalength': 838, 'start': 2174, 'stopcodon': 'tag', 'nlength': 2517}
+   'frame': 2, 'stop': 2774, 'aalength': 57, 'start': 2601, 'stopcodon': 'tag', 'nlength': 174}
+   These overlaps exist because they are in different frames. In this example, one is in frame 1 and another is in frame 2.
+   
+   The fraction is 0.806. Computed by switching an array of 0s. Each 0 represents a nucleotide, 0 will change
+   to 1 if it is involved in coding. Then count the number of 1s to get the fraction.
+  
+ d) The protein is called eyeless, isoform A [Drosophila melanogaster] 
+   
+   
+
+
+
+
+
+
+
+
+
+
