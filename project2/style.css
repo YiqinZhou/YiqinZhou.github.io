@@ -1,0 +1,81 @@
+body {
+    background-color: hsla(120, 60%, 70%, 0.3);
+}
+
+h1 {
+    color: blue;
+    text-decoration: underline;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+    line-height:200%;
+    word-spacing:3px;
+
+
+}
+div.scroll {
+    margin: auto;
+    position: relative;
+    background-color: white;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 700px;
+    height: 100px;
+    overflow: scroll;
+    font-size:20px;
+
+}
+
+.quote{
+    background-color:white;
+    text-indent:10px;
+
+}
+
+p.thicker{
+    font-weight:900;
+    font-style:oblique;
+}
+
+.firstpic{
+    margin: auto;
+    width: 30%;
+    padding: 50px;
+}
+
+
+.navbar{
+          width: 1080px;
+          margin:auto;
+          display: flex;
+          justify-content: center;
+}
+
+.navbar-bg{
+        border-style:double;
+        width:100%;
+        min-width: 1000px;
+        background-color: grey;
+        height: 100px;
+      }
+
+
+ .option {
+
+
+        font-size:15    px;
+        color:#0c9bf9;
+        line-height: 84px;
+        padding-left:60px;
+        padding-right:60px;
+        cursor: pointer;
+      }
+      .option:hover{
+        color:white;
+      }
