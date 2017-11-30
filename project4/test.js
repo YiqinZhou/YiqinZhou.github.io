@@ -1,5 +1,5 @@
 
-$(document).ready(function(){
+$(function(){
     $("#1").click(function(){
       let x = $("#1input").val();
       $("#1output").text(5*x-3*x*x+13);
